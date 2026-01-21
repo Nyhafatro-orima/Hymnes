@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tononkira</title>
+    <style>
+        :root {
+            --primary: #ff9800;
+            --secondary: #479087;
+            --bg-dark: #1a1a1a;
+            --card-bg: #252525;
+            --text-main: #ffffff;
+            --text-dim: #ccc;
+            --border: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .header-wrapper {
+            width: 100%;
+            position: relative;
+            height: 350px;
+            overflow: hidden;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4);
+            -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+        }
+
+        .title-overlay {
+            position: absolute;
+            bottom: 30px;
+            width: 100%;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .title-overlay h1 {
+            margin: 0;
+            font-size: clamp(1.4rem, 6vw, 2.5rem);
+            text-transform: uppercase;
+            color: white;
+        }
+
+        .header-desc {
+            font-size: 1rem;
+            color: #eee;
+            max-width: 600px;
+            margin: 10px auto 0;
+            line-height: 1.4;
+        }
+
+        .keyword { color: var(--secondary); font-weight: 600; }
+        .highlight { color: var(--primary); }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            padding: 0 20px;
+        }
+
+        .app-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            width: 100%;
+            margin: 20px 0;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 1.2rem; font-weight: bold; }
+        .stat-label { font-size: 0.75rem; color: #888; }
+
+        .presentation-section { width: 100%; margin: 30px 0; }
+        .presentation-section h2 { color: white; font-size: 1.5rem; margin-bottom: 15px; }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            width: 100%;
+        }
+
+        .objective-item {
+            background: var(--card-bg);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+        }
+
+        .objective-item b { color: var(--secondary); display: block; margin-bottom: 2px; }
+
+        .testimonials-section { width: 100%; margin: 30px 0; }
+        .testimonials-section h2 { color: white; font-size: 1.5rem; margin-bottom: 20px; }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .user-photo-placeholder {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--secondary);
+            margin-right: 12px;
+            background-color: #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #888;
+            flex-shrink: 0;
+        }
+
+        /* Mise à jour pour mettre les étoiles en dessous */
+        .user-info-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name { font-weight: bold; color: #fff; }
+        .user-stars { color: var(--primary); font-size: 0.8rem; }
+        .testimonial-text { font-size: 0.85rem; color: var(--text-dim); text-align: justify; margin: 0; }
+
+        .download-section {
+            width: 100%;
+            margin: 40px 0 60px 0;
+            text-align: center;
+            background: var(--card-bg);
+            padding: 40px 20px;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+        }
+
+        .download-section h2 { color: white; font-size: 1.8rem; margin: 0 0 10px 0; }
+        .download-section p { color: var(--text-dim); font-size: 1rem; margin-bottom: 25px; }
+
+        .download-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--primary);
+            color: #000;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: 0.3s;
+            border: 2px solid var(--primary);
+        }
+
+        .download-btn:hover {
+            background: transparent;
+            color: var(--primary);
+        }
+
+        footer {
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            background: #111;
+            color: #666;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-wrapper">
+        <img src="https://images.unsplash.com/photo-1438032005730-c779502df39b?q=80&w=1471&auto=format&fit=crop" class="main-image">
+        <div class="title-overlay">
+            <h1>Tononkira <span class="highlight">Advantista</span></h1>
+            <p class="header-desc">
+                Vos <span class="keyword">cantiques favoris</span> partout. 
+                Une <span class="keyword">louange céleste</span> pour 
+                <span class="keyword">nourrir votre foi</span> au quotidien.
+            </p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="app-stats">
+            <div class="stat-item"><div class="stat-value"><span class="highlight">4.9 ★</span></div><div class="stat-label">Avis</div></div>
+            <div class="stat-item" style="border-left:1px solid var(--border); border-right:1px solid var(--border);"><div class="stat-value">2,5k+</div><div class="stat-label">Downloads</div></div>
+            <div class="stat-item"><div class="stat-value">2.1.1</div><div class="stat-label">Version</div></div>
+        </div>
+
+        <div class="presentation-section">
+            <h2>Nos <span class="highlight">fonctionnalités</span></h2>
+            <div class="objectives-grid">
+                <div class="objective-item"><b>Accessibilité</b>Utilisation hors-ligne complète partout.</div>
+                <div class="objective-item"><b>Rapidité</b>Recherche par titre/artist instantanée.</div>
+                <div class="objective-item"><b>Inclusion</b>Compatible pour android 7+</div>
+                <div class="objective-item"><b>Spirituel</b>Faciliter la louange personnelle.</div>
+            </div>
+        </div>
+
+        <div class="testimonials-section">
+            <h2>Avis des <span class="highlight">utilisateurs</span></h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="user-photo-placeholder">👤</div>
+                        <div class="user-info-text">
+                            <span class="user-name">Mihaja Randria</span>
+                            <span class="user-stars">★★★★★</span>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">Cette application est devenue mon outil principal pour le sabbat après-midi. L'interface est intuitive et je n'ai plus besoin de chercher mon recueil physique.</p>
+                </div>
+                <div class="testimonial-card">
+                  <div class="testimonial-header">
+                      <div class="user-photo-placeholder">👤</div>
+                      <div class="user-info-text">
+                          <span class="user-name">Mialy Nandrianina</span>
+                          <span class="user-stars">★★★★☆</span>
+                      </div>
+                  </div>
+                  <p class="testimonial-text">
+                      J’utilise Tononkira pendant nos répétitions, et la navigation rapide entre les chants est vraiment impressionnante. L’application est fiable et très stable.
+                  </p>
+              </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="user-photo-placeholder">👨‍💻</div>
+                        <div class="user-info-text">
+                            <span class="user-name">Ny Hafatro - Orima</span>
+                            <span class="user-stars">★★★★★</span>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        En tant que développeur, j’ai conçu Tononkira avec une attention particulière à la performance,
+                        à la stabilité et à l’accessibilité hors ligne. L’application permet une navigation fluide entre
+                        les cantiques, même sur des appareils modestes. Mon objectif était de proposer un outil fiable
+                        et simple pour soutenir la louange et le service chrétien adventiste.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <h2>Télécharger l'application</h2>
+            <p>Obtenez la dernière version officielle pour votre appareil Android</p>
+            <a href="apk/Tononkira --release.apk" class="download-btn" download>Télécharger maintenant l'Apk</a>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 Tononkira Advantista - Tous droits réservés.
+    </footer>
+
+</body>
+</html>
